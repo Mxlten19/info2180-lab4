@@ -7,13 +7,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function fetchSuperheroesAlert() {
-        // Using XMLHttpRequest as mentioned in the hint
+        // Using XMLHttpRequest to fetch the superheroes.php
         const xhr = new XMLHttpRequest();
         xhr.open('GET', 'superheroes.php', true);
         
         xhr.onload = function() {
             if (xhr.status === 200) {
-                // Since superheroes.php returns HTML with a list, we need to parse it
+                // Parse the HTML response to extract the list items
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(xhr.responseText, 'text/html');
                 const listItems = doc.querySelectorAll('li');
@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     alertMessage += `• ${item.textContent}\n`;
                 });
                 
+                // Show the alert with the list
                 alert(alertMessage);
             } else {
                 alert('Error fetching superheroes. Status: ' + xhr.status);
